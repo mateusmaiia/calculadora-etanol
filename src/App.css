@@ -42,3 +42,36 @@
   font-size: 22px;
   font-weight: bold;
 }
+
+.result {
+  background: #00b63e;
+  width: 100%;
+  max-width: 420px;
+  padding: 20px 28px;
+  border-radius: 4px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 24px;
+
+  transition: transform 0.8s;
+}
+
+.result:hover {
+  transform: scale(1.1); /*1 tamanho padrão 1.1 aumenta*/
+}
+
+.result-title {
+  color: #fff;
+  margin-bottom: 16px;
+  font-size: 24px;
+  font-weigth: bold;
+}
+
+.result span {
+  color: #fff;
+  margin-bototm: 8px;
+  font-size: 18px;
+}

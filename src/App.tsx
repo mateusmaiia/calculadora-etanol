@@ -6,10 +6,44 @@ export function App(){
 
   const [ gasolinaInput, setGasolinaInput] = useState(0)
   const [ alcoolInput, setAlcoolInput] = useState(0)
+  const [ info, setInfo ] = useState<infoProps>()
+
+  interface infoProps{
+    title?: string;
+    gasolina?: string | number;
+    alcool?: string | number;
+  }
 
   function calcular(event: FormEvent){
-    alert('ui')
+    event.preventDefault()
+    
+    const calculo = (alcoolInput / gasolinaInput)
+
+    if(calculo <= 0.7){
+      setInfo({
+        title: 'Compensa usar Álcool',
+        gasolina: formatarMoeda(gasolinaInput),
+        alcool: formatarMoeda(alcoolInput)
+      })
+    }else{
+      setInfo({
+        title: 'Compensa usar Gasolina',
+        gasolina: formatarMoeda(gasolinaInput),
+        alcool: formatarMoeda(alcoolInput)
+      })
+    }
   }
+
+  function formatarMoeda(valor: number){
+    const valorFormatado = valor.toLocaleString("pt-br",
+    {
+      style: "currency",
+      currency: "BRL"
+    })
+
+    return valorFormatado;
+  }
+
   return(
     <>
      <main className='container'>
@@ -25,7 +59,6 @@ export function App(){
         <label htmlFor="">
           Álcool (preço por litro)
         </label>
-
         <input 
           className='input'
           type="number" 
@@ -33,12 +66,13 @@ export function App(){
           min={1}
           step={0.1}
           required
+          value={alcoolInput} /*O que digitar neste input vai ser passado para essa useState*/ 
+          onChange={ (e) => setAlcoolInput(Number(e.target.value))}
         />
 
         <label htmlFor="">
           Gasolina (preço por litro)
         </label>
-
         <input 
           className='input'
           type="number" 
@@ -46,6 +80,8 @@ export function App(){
           min={1}
           step={0.1}
           required
+          value={gasolinaInput}
+          onChange={(e) => setGasolinaInput(Number(e.target.value))}
         />
 
         <input 
@@ -54,6 +90,15 @@ export function App(){
           value='calcular'
         />
       </form>
+
+      {info && Object.keys(info).length > 0 && (
+        <section className='result'>
+          <h2 className='result-title'>{info.title}</h2>
+
+          <span>Álcool {info.alcool}</span>
+          <span>Gasolina {info.gasolina}</span>
+        </section>
+      )}
      </main>
     </>
   )
