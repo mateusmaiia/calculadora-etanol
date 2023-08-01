@@ -87,7 +87,7 @@ export function App(){
         <input 
           className='button'
           type="submit" 
-          value='calcular'
+          // value='calcular'
         />
       </form>
 

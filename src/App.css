@@ -41,6 +41,12 @@
   color: #fff;
   font-size: 22px;
   font-weight: bold;
+
+  transition: transform 0.7s;
+}
+
+.button:hover {
+  transform: scale(1.02);
 }
 
 .result {
